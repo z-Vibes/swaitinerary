@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Southwest Training Itinerary</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+    
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 10px;
+    }
+    
+    header {
+      background-color: #304CB2;
+      color: white;
+      padding: 15px;
+      border-radius: 8px 8px 0 0;
+      margin-bottom: 15px;
+    }
+    
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    
+    .section {
+      margin-bottom: 15px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .section-header {
+      padding: 12px 15px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+    
+    .section-header.schedule { background-color: #304CB2; }
+    .section-header.best-practices { background-color: #28a745; }
+    .section-header.reminders { background-color: #dc3545; }
+    .section-header.contacts { background-color: #fd7e14; }
+    .section-header.locations { background-color: #0275d8; }
+    
+    .section-content {
+      background-color: white;
+      padding: 15px;
+      display: none;
+    }
+    
+    .day {
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .day-header {
+      background-color: #f0f0f0;
+      padding: 10px 15px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .day-title {
+      color: #304CB2;
+      font-weight: bold;
+      margin-top: 5px;
+      font-size: 0.9rem;
+    }
+    
+    .day-content {
+      padding: 10px 15px;
+      display: none;
+      border-top: 1px solid #ddd;
+    }
+    
+    .event {
+      display: flex;
+      margin-bottom: 8px;
+      align-items: flex-start;
+    }
+    
+    .event-time {
+      min-width: 85px;
+      font-weight: bold;
+      color: #304CB2;
+    }
+    
+    .alert {
+      color: #dc3545;
+      font-weight: bold;
+      font-size: 0.85rem;
+      margin-top: 4px;
+    }
+    
+    ul {
+      padding-left: 20px;
+      margin: 0;
+    }
+    
+    li {
+      margin-bottom: 8px;
+    }
+    
+    .contact-item {
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .contact-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    
+    .location-item {
+      background-color: #f0f7ff;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+    }
+    
+    .location-address {
+      font-size: 0.9rem;
+      margin: 5px 0;
+    }
+    
+    .location-details {
+      font-size: 0.85rem;
+      color: #666;
+    }
+    
+    .best-practices-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    
+    .best-practices-card {
+      background-color: #f0fff0;
+      padding: 10px;
+      border-radius: 4px;
+    }
+    
+    .best-practices-title {
+      color: #28a745;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    
+    footer {
+      background-color: #eee;
+      padding: 10px;
+      text-align: center;
+      font-size: 0.8rem;
+      border-radius: 0 0 8px 8px;
+      margin-top: 15px;
+    }
+    
+    @media (min-width: 600px) {
+      .best-practices-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Southwest Airlines Training Itinerary</h1>
+      <p>March 30 - April 11, 2025 | Dallas, TX</p>
+    </header>
+    
+    <div class="section">
+      <div class="section-header schedule" onclick="toggleSection('schedule')">
+        <h2>Daily Schedule</h2>
+        <span class="toggle">▼</span>
+      </div>
+      <div id="schedule" class="section-content">
+        <div class="day">
+          <div class="day-header" onclick="toggleDay('mar30')">
+            <div>
+              <h3>Sunday, March 30, 2025</h3>
+              <div class="day-title">TRAVEL DAY</div>
+            </div>
+            <span class="toggle">▼</span>
+          </div>
+          <div id="mar30" class="day-content">
+            <div class="event">
+              <div class="event-time">7:45 AM</div>
+              <div>Arrive at Las Vegas Airport (2 hours before departure)</div>
+            </div>
+            <div class="event">
+              <div class="event-time">9:45 AM</div>
+              <div>Flight WN2145 departs Las Vegas</div>
+            </div>
+            <div class="event">
+              <div class="event-time">2:40 PM</div>
+              <div>Arrive at Dallas Love Field</div>
+            </div>
+            <div class="event">
+              <div class="event-time">2:50 PM</div>
+              <div>Pick up Echo shuttle at lower-level curbside in front of Lobby Exit</div>
+            </div>
+            <div class="event">
+              <div class="event-time">3:30 PM</div>
+              <div>Check in at Sheraton Dallas Hotel by the Galleria</div>
+            </div>
+            <div class="event">
+              <div class="event-time">Evening</div>
+              <div>Relax, prepare for training, review materials</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="day">
+          <div class="day-header" onclick="toggleDay('mar31')">
+            <div>
+              <h3>Monday, March 31, 2025</h3>
+              <div class="day-title">NOW ONBOARDING DAY</div>
+            </div>
+            <span class="toggle">▶</span>
+          </div>
+          <div id="mar31" class="day-content">
+            <div class="event">
+              <div class="event-time">5:45 AM</div>
+              <div>Wake up, prepare for day</div>
+            </div>
+            <div class="event">
+              <div class="event-time">6:00 AM</div>
+              <div>Breakfast at hotel</div>
+            </div>
+            <div class="event">
+              <div class="event-time">6:15 AM</div>
+              <div>Shuttle to TOPS building</div>
+            </div>
+            <div class="event">
+              <div class="event-time">6:45 AM</div>
+              <div>Meet Instructor Melo in Classroom 235, pick up meal card</div>
+            </div>
+            <div class="event">
+              <div class="event-time">8:30 AM - 3:00 PM</div>
+              <div>Now Onboarding Class (includes campus walking tour)</div>
+            </div>
+            <div class="event">
+              <div class="event-time">4:15 PM</div>
+              <div>Bus departs to hotel</div>
+            </div>
+            <div class="event">
+              <div class="event-time">Evening</div>
+              <div>Dinner, prepare for training week</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="day">
+          <div class="day-header" onclick="toggleDay('apr1to4')">
+            <div>
+              <h3>Tuesday, April 1 - Friday, April 4, 2025</h3>
+              <div class="day-title">TRAINING WEEK 1</div>
+            </div>
+            <span class="toggle">▶</span>
+          </div>
+          <div id="apr1to4" class="day-content">
+            <div class="event">
+              <div class="event-time">5:45 AM</div>
+              <div>Wake up, prepare for day</div>
+            </div>
+            <div class="event">
+              <div class="event-time">6:15 AM</div>
+              <div>Breakfast at hotel</div>
+            </div>
+            <div class="event">
+              <div class="event-time">6:30 AM</div>
+              <div>Shuttle to TOPS building</div>
+            </div>
+            <div class="event">
+              <div class="event-time">7:30 AM - 4:00 PM</div>
+              <div>Customer Service Initial Training (Classroom 235)</div>
+            </div>
+            <div class="event">
+              <div class="event-time">4:15 PM</div>
+              <div>Bus departs to hotel</div>
+            </div>
+            <div class="event">
+              <div class="event-time">Evening</div>
+              <div>Dinner, study, review materials</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="day">
+          <div class="day-header" onclick="toggleDay('apr5to6')">
+            <div>
+              <h3>Saturday, April 5 - Sunday, April 6, 2025</h3>
+              <div class="day-title">WEEKEND</div>
+            </div>
+            <span class="toggle">▶</span>
+          </div>
+          <div id="apr5to6" class="day-content">
+            <div class="event">
+              <div class="event-time">All Day</div>
+              <div>Free time at hotel</div>
+            </div>
+            <div class="event">
+              <div class="event-time">Available</div>
+              <div>Hotel amenities: Wi-Fi, laundry, 25% food discount</div>
+            </div>
+            <div class="event">
+              <div class="event-time">Optional</div>
+              <div>Explore Dallas (using complimentary transportation within 5-mile radius)</div>
+            </div>
+            <div class="event">
+              <div class="event-time">Evening</div>
+              <div>Prepare for second week of training</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="day">
+          <div class="day-header" onclick="toggleDay('apr7to10')">
+            <div>
+              <h3>Monday, April 7 - Thursday, April 10, 2025</h3>
+              <div class="day-title">TRAINING WEEK 2</div>
+            </div>
+            <span class="toggle">▶</span>
+          </div>
+          <div id="apr7to10" class="day-content">
+            <div class="event">
+              <div class="event-time">5:45 AM</div>
+              <div>Wake up, prepare for day</div>
+            </div>
+            <div class="event">
+              <div class="event-time">6:15 AM</div>
+              <div>Breakfast at hotel</div>
+            </div>
+            <div class="event">
+              <div class="event-time">6:30 AM</div>
+              <div>Shuttle to TOPS building</div>
+            </div>
+            <div class="event">
+              <div class="event-time">7:30 AM - 4:00 PM</div>
+              <div>Customer Service Initial Training continued (Classroom 235)</div>
+            </div>
+            <div class="event">
+              <div class="event-time">4:15 PM</div>
+              <div>Bus departs to hotel</div>
+            </div>
+            <div class="event">
+              <div class="event-time">Evening</div>
+              <div>Dinner, study, review materials</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="day">
+          <div class="day-header" onclick="toggleDay('apr11')">
+            <div>
+              <h3>Friday, April 11, 2025</h3>
+              <div class="day-title">FINAL DAY & RETURN TRAVEL</div>
+            </div>
+            <span class="toggle">▶</span>
+          </div>
+          <div id="apr11" class="day-content">
+            <div class="event">
+              <div class="event-time">5:45 AM</div>
+              <div>Wake up, prepare for day</div>
+            </div>
+            <div class="event">
+              <div class="event-time">6:00 AM</div>
+              <div>Breakfast at hotel</div>
+            </div>
+            <div class="event">
+              <div class="event-time">6:15 AM</div>
+              <div>Pack bags, check out of hotel</div>
+            </div>
+            <div class="event">
+              <div class="event-time">6:30 AM</div>
+              <div>Shuttle to TOPS building (with luggage)</div>
+            </div>
+            <div class="event">
+              <div class="event-time">7:30 AM - 4:00 PM</div>
+              <div>Final day of training (Classroom 235)</div>
+            </div>
+            <div class="event">
+              <div class="event-time">4:15 PM</div>
+              <div>Bus departs to Dallas Love Field</div>
+            </div>
+            <div class="event">
+              <div class="event-time">5:15 PM</div>
+              <div>CURRENT flight departure time (needs rescheduling)</div>
+            </div>
+            <div class="alert">Action required: Contact leadership to reschedule for after 5:45 PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="section">
+      <div class="section-header best-practices" onclick="toggleSection('bestPractices')">
+        <h2>Best Practices</h2>
+        <span class="toggle">▶</span>
+      </div>
+      <div id="bestPractices" class="section-content">
+        <div class="best-practices-grid">
+          <div class="best-practices-card">
+            <div class="best-practices-title">Before Travel</div>
+            <ul>
+              <li>Make copies of important documents</li>
+              <li>Download the SWA U App</li>
+              <li>Pack professional attire for 10 days</li>
+              <li>Check weather forecast for Dallas</li>
+              <li>Set up email and Teams access on devices</li>
+            </ul>
+          </div>
+          
+          <div class="best-practices-card">
+            <div class="best-practices-title">At the Hotel</div>
+            <ul>
+              <li>Familiarize with shuttle schedules</li>
+              <li>Use complimentary amenities</li>
+              <li>Prepare items for next day before sleep</li>
+              <li>Keep meal card secure but accessible</li>
+              <li>Establish consistent morning routine</li>
+            </ul>
+          </div>
+          
+          <div class="best-practices-card">
+            <div class="best-practices-title">During Training</div>
+            <ul>
+              <li>Arrive 15 minutes early to each session</li>
+              <li>Take detailed notes on procedures</li>
+              <li>Participate actively in discussions</li>
+              <li>Network with classmates from other stations</li>
+              <li>Use the weekend to review materials</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="section">
+      <div class="section-header reminders" onclick="toggleSection('reminders')">
+        <h2>Important Reminders</h2>
+        <span class="toggle">▶</span>
+      </div>
+      <div id="reminders" class="section-content">
+        <ul>
+          <li>Wear Southwest badge visibly at all times (if already issued)</li>
+          <li>Bring notebook and pen/pencil or electronic device for notes</li>
+          <li>Professional attire required for all training days</li>
+          <li>Keep meal card with you at all times</li>
+          <li>Lyft code SWAUQ225 (if needed outside shuttle hours)</li>
+          <li>No family members/guests/pets allowed in hotel accommodations</li>
+          <li>RESCHEDULING NEEDED for return flight (must be after 5:45 PM)</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="section">
+      <div class="section-header contacts" onclick="toggleSection('contacts')">
+        <h2>Important Contacts</h2>
+        <span class="toggle">▶</span>
+      </div>
+      <div id="contacts" class="section-content">
+        <div class="contact-item">
+          <h3>Instructor: Melo Lozano</h3>
+          <p>Cell: 818-648-8466</p>
+          <p>Office: 469-603-3605</p>
+          <p>Email: Melo.Lozano@wnco.com</p>
+        </div>
+        
+        <div class="contact-item">
+          <h3>Transportation/Hotel Issues</h3>
+          <p>Email: swauniversity@wnco.com</p>
+        </div>
+        
+        <div class="contact-item">
+          <h3>Technical Issues</h3>
+          <p>Employee Service Center: 877-792-4792</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="section">
+      <div class="section-header locations" onclick="toggleSection('locations')">
+        <h2>Locations</h2>
+        <span class="toggle">▶</span>
+      </div>
+      <div id="locations" class="section-content">
+        <div class="location-item">
+          <h3>TOPS Building</h3>
+          <p class="location-address">2170 Research Row, Dallas, TX 75235</p>
+          <p class="location-details">Training facility where classes will be held</p>
+        </div>
+        
+        <div class="location-item">
+          <h3>Sheraton Dallas Hotel by the Galleria</h3>
+          <p class="location-address">4801 Interstate 635 Service Rd, Dallas, TX 75244</p>
+          <p class="location-details">Phone: 972-661-3600</p>
+        </div>
+      </div>
+    </div>
+    
+    <footer>
+      <p>Southwest Airlines Training Itinerary | March 30 - April 11, 2025</p>
+      <p>Created for your Southwest Airlines training experience</p>
+    </footer>
+  </div>
+  
+  <script>
+    // Show the Schedule section by default
+    document.getElementById('schedule').style.display = 'block';
+    document.getElementById('mar30').style.display = 'block';
+    
+    function toggleSection(sectionId) {
+      const section = document.getElementById(sectionId);
+      if (section.style.display === 'block') {
+        section.style.display = 'none';
+        section.previousElementSibling.querySelector('.toggle').textContent = '▶';
+      } else {
+        section.style.display = 'block';
+        section.previousElementSibling.querySelector('.toggle').textContent = '▼';
+      }
+    }
+    
+    function toggleDay(dayId) {
+      const day = document.getElementById(dayId);
+      if (day.style.display === 'block') {
+        day.style.display = 'none';
+        day.previousElementSibling.querySelector('.toggle').textContent = '▶';
+      } else {
+        day.style.display = 'block';
+        day.previousElementSibling.querySelector('.toggle').textContent = '▼';
+      }
+    }
+  </script>
+</body>
+</html>
